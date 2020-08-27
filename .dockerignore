@@ -1,0 +1,10 @@
+**/.git
+**/.idea
+
+**/node_modules
+**/dist
+
+.gitignore
+.dockerignore
+Dockerfile
+README.md
