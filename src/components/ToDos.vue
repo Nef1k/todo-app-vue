@@ -1,9 +1,24 @@
 <template>
-  <div>
-    <div v-for="todo in todos" v-bind:key="todo.id">
-      <ToDoItem v-bind:todo="todo" v-on:del-todo="$emit('del-todo', todo.id)"/>
-    </div>
-  </div>
+  <v-row align="center">
+    <v-card
+        class="mx-auto"
+        min-width="900"
+        max-width="1000"
+        tile
+    >
+      <v-list flat>
+        <v-subheader>ToDos</v-subheader>
+        <v-list-item-group multiple>
+          <ToDoItem
+              :todo="todo"
+              v-for="todo in todos"
+              v-bind:key="todo.id"
+              v-on:del-todo="$emit('del-todo', todo.id)"
+          />
+        </v-list-item-group>
+      </v-list>
+    </v-card>
+  </v-row>
 </template>
 
 <script>

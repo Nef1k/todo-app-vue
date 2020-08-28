@@ -1,8 +1,11 @@
 <template>
-  <div id="app">
+  <v-app>
     <Header />
-    <router-view/>
-  </div>
+
+    <v-main>
+      <router-view />
+    </v-main>
+  </v-app>
 </template>
 
 <script>
@@ -10,11 +13,12 @@ import Header from "@/components/layout/Header";
 
 export default {
   name: 'App',
-  components: {
-    Header
-  }
-}
-</script>
 
-<style>
-</style>
+  components: {
+    Header,
+  },
+
+  data: () => ({
+  }),
+};
+</script>

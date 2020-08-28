@@ -1,10 +1,17 @@
 <template>
-  <div>
-    <form @submit.prevent @submit="addToDo">
-      <input type="text" v-model="title" name="title" placeholder="Add ToDo">
-      <input type="submit" value="Submit" class="btn">
-    </form>
-  </div>
+  <v-row align="center">
+    <v-card
+        class="mx-auto mt-5 pa-5 pb-3"
+        min-width="900"
+        max-width="1000"
+        tile
+    >
+      <div class="d-flex align-baseline">
+        <v-text-field v-model="title" label="What needs to be done?" class="mr-5"></v-text-field>
+        <v-btn class="justify-end" @click="addToDo" color="primary">Add</v-btn>
+      </div>
+    </v-card>
+  </v-row>
 </template>
 
 <script>

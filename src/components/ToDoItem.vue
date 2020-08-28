@@ -1,43 +1,32 @@
 <template>
-  <div class="todo-item" v-bind:class="{ 'is-complete': todo.completed }">
-    <p>
-      <input type="checkbox" v-on:change="markComplete">
-      {{ todo.title }}
-      <button @click="$emit('del-todo', todo.id)" class="del">X</button>
-    </p>
-  </div>
+  <v-list-item>
+    <template v-slot:default="{ active }">
+      <v-list-item-action>
+        <v-checkbox :input-value="active" v-model="todo.completed"></v-checkbox>
+      </v-list-item-action>
+      <v-list-item-content>
+        <v-list-item-title v-html="todo.title" v-bind:class="{ 'text-decoration-line-through': todo.completed }"></v-list-item-title>
+      </v-list-item-content>
+      <v-list-item-action>
+        <v-btn
+            small
+            text
+            @click="$emit('del-todo', todo.id)"
+        >
+          <v-icon>mdi-delete-sweep</v-icon>
+        </v-btn>
+      </v-list-item-action>
+    </template>
+  </v-list-item>
 </template>
 
 <script>
 export default {
   name: "ToDoItem",
   props: ['todo'],
-  methods: {
-    markComplete() {
-      this.todo.is_completed = !this.todo.is_completed
-    }
-  }
 }
 </script>
 
 <style scoped>
-
-.todo-item {
-  background: #f4f4f4;
-  padding: 10px;
-  border-bottom: 1px #ccc dotted;
-}
-.is-complete {
-  text-decoration: line-through;
-}
-.del {
-  background: #FF6961;
-  color: #fff;
-  border: none;
-  padding: 5px 9px;
-  border-radius: 50%;
-  cursor: pointer;
-  float: right;
-}
 
 </style>
