@@ -11,9 +11,8 @@
         <v-list-item-group multiple>
           <ToDoItem
               :todo="todo"
-              v-for="todo in todos"
+              v-for="todo in allTodos"
               v-bind:key="todo.id"
-              v-on:del-todo="$emit('del-todo', todo.id)"
           />
         </v-list-item-group>
       </v-list>
@@ -23,13 +22,23 @@
 
 <script>
 import ToDoItem from "@/components/ToDoItem";
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: "ToDos",
   components: {
     ToDoItem
   },
-  props: ["todos"]
+  props: ["todos"],
+  computed: mapGetters(['allTodos']),
+  methods: {
+    ...mapActions([
+        'fetchTodos'
+    ]),
+  },
+  created() {
+    this.fetchTodos();
+  }
 }
 </script>
 

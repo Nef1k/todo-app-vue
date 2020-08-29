@@ -15,20 +15,19 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   name: "AddToDo",
-  data() {
+  data: () => {
     return {
       title: ''
     }
   },
   methods: {
+    ...mapActions(['addTodo']),
     addToDo() {
-      const newToDo = {
-        title: this.title,
-        completed: false
-      }
-      this.$emit('add-todo', newToDo);
+      this.addTodo(this.title);
       this.title = '';
     }
   }

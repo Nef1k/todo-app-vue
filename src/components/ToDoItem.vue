@@ -11,7 +11,7 @@
         <v-btn
             small
             text
-            @click="$emit('del-todo', todo.id)"
+            @click="deleteTodo(todo.id)"
         >
           <v-icon>mdi-delete-sweep</v-icon>
         </v-btn>
@@ -21,9 +21,14 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   name: "ToDoItem",
   props: ['todo'],
+  methods: {
+    ...mapActions(['deleteTodo'])
+  }
 }
 </script>
 
