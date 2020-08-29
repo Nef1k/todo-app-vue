@@ -1,16 +1,20 @@
 import axios from 'axios';
 
 const state = {
-    todos: []
+    todos: [],
+    isFetchingData: false
 };
 
 const getters = {
-    allTodos: state => state.todos
+    allTodos: state => state.todos,
+    isFetchingData: state => state.isFetchingData
 };
 
 const actions = {
-    async fetchTodos({ commit }) {
+    async fetchTodos({ commit, dispatch }) {
+        dispatch('startFetchingData');
         const response = await axios.get('https://jsonplaceholder.typicode.com/todos');
+        dispatch('stopFetchingData');
         commit('setTodos', response.data);
     },
     async addTodo({ commit }, title) {
@@ -25,9 +29,17 @@ const actions = {
         await axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`);
         commit('removeTodo', id);
     },
-    async filterTodos({ commit }, newPageSize) {
+    async filterTodos({ commit, dispatch }, newPageSize) {
+        dispatch('startFetchingData');
         const response = await axios.get(`https://jsonplaceholder.typicode.com/todos?_limit=${newPageSize}`);
+        dispatch('stopFetchingData');
         commit('setTodos', response.data)
+    },
+    startFetchingData({ commit }) {
+        commit('startFetchingData');
+    },
+    stopFetchingData({ commit }) {
+        commit('stopFetchingData');
     }
 };
 
@@ -36,7 +48,9 @@ const mutations = {
         state.todos = todos
     ),
     newTodo: (state, todo) => state.todos.unshift(todo),
-    removeTodo: (state, id) => state.todos = state.todos.filter(todo => todo.id !== id)
+    removeTodo: (state, id) => state.todos = state.todos.filter(todo => todo.id !== id),
+    startFetchingData: (state) => state.isFetchingData = true,
+    stopFetchingData: (state) => state.isFetchingData = false,
 };
 
 export default {

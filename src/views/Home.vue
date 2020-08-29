@@ -20,10 +20,12 @@
 import AddToDo from "@/components/AddToDo";
 import ToDos from '@/components/ToDos';
 import FilterTodos from "@/components/FilterTodos";
+import Loader from "@/components/layout/Loader";
 
 export default {
   name: 'Home',
   components: {
+    Loader,
     AddToDo,
     FilterTodos,
     ToDos

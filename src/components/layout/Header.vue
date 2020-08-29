@@ -1,41 +1,26 @@
 <template>
-  <div>
-    <v-app-bar
-        app
-        color="primary"
-        dark
-    >
-      <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
-      <v-toolbar-title>ToDo App</v-toolbar-title>
-    </v-app-bar>
+  <v-app-bar
+      app
+      color="primary"
+      dark
+  >
+    <v-app-bar-nav-icon>
+      <v-icon>mdi-home</v-icon>
+    </v-app-bar-nav-icon>
+    <v-toolbar-title class="page-title">ToDo App</v-toolbar-title>
 
-    <v-navigation-drawer
-        v-model="drawer"
-        absolute
-        temporary
-    >
-      <v-list
-          nav
-          dense
-      >
-        <v-list-item-group
-            active-class="deep-purple--text text--accent-4"
-        >
-          <v-list-item v-for="item in items" v-bind:key="item.id" :to="{ name: item.route }">
-            <v-list-item-icon><v-icon>mdi-{{ item.icon }}</v-icon></v-list-item-icon>
-            <v-list-item-title>{{ item.text }}</v-list-item-title>
-          </v-list-item>
-        </v-list-item-group>
-      </v-list>
-    </v-navigation-drawer>
-  </div>
+    <v-tabs align-with-title>
+      <v-tab v-for="item in items" :key="item.id" :to="{ name: item.route }">{{ item.text }}</v-tab>
+    </v-tabs>
+  </v-app-bar>
 </template>
 
 <script>
+import {mapGetters} from "vuex";
+
 export default {
   name: "Header",
   data: () => ({
-    drawer: false,
     items: [
       {
         id: 1,
@@ -51,5 +36,14 @@ export default {
       }
     ]
   }),
+  computed: {
+    ...mapGetters(['isFetchingData'])
+  }
 }
 </script>
+
+<style>
+  .page-title {
+    min-width: 240px;
+  }
+</style>

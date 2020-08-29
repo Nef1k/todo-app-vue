@@ -2,7 +2,13 @@
   <v-card>
     <v-list flat>
       <v-subheader>ToDos</v-subheader>
-      <v-list-item-group multiple>
+      <v-list-item-group>
+        <Loader />
+      </v-list-item-group>
+      <v-list-item-group
+          multiple
+          v-if="!isFetchingData"
+      >
         <ToDoItem
             :todo="todo"
             v-for="todo in allTodos"
@@ -14,16 +20,18 @@
 </template>
 
 <script>
-import ToDoItem from "@/components/ToDoItem";
 import { mapGetters, mapActions } from 'vuex';
+import Loader from "@/components/layout/Loader";
+import ToDoItem from "@/components/ToDoItem";
 
 export default {
   name: "ToDos",
   components: {
-    ToDoItem
+    ToDoItem,
+    Loader
   },
   props: ["todos"],
-  computed: mapGetters(['allTodos']),
+  computed: mapGetters(['allTodos', 'isFetchingData']),
   methods: {
     ...mapActions([
         'fetchTodos'
