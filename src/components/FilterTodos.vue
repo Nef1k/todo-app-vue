@@ -1,18 +1,11 @@
 <template>
-  <v-row align="center">
-    <v-card
-        class="mx-auto pa-5"
-        min-width="900"
-        max-width="1000"
-        tile
-    >
-      <v-select
-          :items="pageSizes"
-          label="Page size..."
-          @change="filterTodos"
-      />
-    </v-card>
-  </v-row>
+  <v-card>
+    <v-select
+        :items="pageSizes"
+        label="Page size..."
+        @change="filterTodos"
+    />
+  </v-card>
 </template>
 
 <script>

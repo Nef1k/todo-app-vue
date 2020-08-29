@@ -1,9 +1,19 @@
 <template>
-  <div>
-    <FilterTodos  class="mt-5"/>
-    <AddToDo />
-    <ToDos class="mt-5"/>
-  </div>
+  <v-container>
+    <v-row class="d-flex align-stretch">
+      <v-col class="" :cols="9">
+        <AddToDo class="d-flex align-baseline pa-3 pb-1 pt-1"/>
+      </v-col>
+      <v-col class="">
+        <FilterTodos class="d-flex align-baseline pa-3 pb-1 pt-1"/>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <ToDos />
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>

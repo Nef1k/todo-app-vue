@@ -1,23 +1,16 @@
 <template>
-  <v-row align="center">
-    <v-card
-        class="mx-auto"
-        min-width="900"
-        max-width="1000"
-        tile
-    >
-      <v-list flat>
-        <v-subheader>ToDos</v-subheader>
-        <v-list-item-group multiple>
-          <ToDoItem
-              :todo="todo"
-              v-for="todo in allTodos"
-              v-bind:key="todo.id"
-          />
-        </v-list-item-group>
-      </v-list>
-    </v-card>
-  </v-row>
+  <v-card>
+    <v-list flat>
+      <v-subheader>ToDos</v-subheader>
+      <v-list-item-group multiple>
+        <ToDoItem
+            :todo="todo"
+            v-for="todo in allTodos"
+            v-bind:key="todo.id"
+        />
+      </v-list-item-group>
+    </v-list>
+  </v-card>
 </template>
 
 <script>
